@@ -1,37 +1,45 @@
+import { Article } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const ArticleList = () => {
+type ArticleProps = {
+  articles: Article[];
+};
+
+const ArticleList = ({ articles }: ArticleProps) => {
   return (
     <div>
-      <article className="shadow my-4 ">
-        <Link href="#" className="hover:opacity-75">
-          <Image
-            src="https://fastly.picsum.photos/id/143/1000/500.jpg?hmac=UlpjMqhIO6lj882FrhxWKwURhkEKW8_HFTAcUhzFXIw"
-            alt="1"
-            width={1280}
-            height={300}
-          />
-        </Link>
-        <div className="bg-white flex flex-col justify-start p-6">
-          <Link href="#" className="text-blue-700 pb-4 font-bold">
-            Technology
+      {articles.map((article) => (
+        <article className="shadow my-4" key={article.id}>
+          <Link href={`/articles/${article.id}`} className="hover:opacity-75">
+            <Image
+              src="https://fastly.picsum.photos/id/143/1000/500.jpg?hmac=UlpjMqhIO6lj882FrhxWKwURhkEKW8_HFTAcUhzFXIw"
+              alt="1"
+              width={1280}
+              height={300}
+            />
           </Link>
-          <Link href="#" className="text-slate-900 text-3xl hover:text-gray-700 pb-4">
-            Next.jsの勉強中
-          </Link>
-          <p className="tex-xm text-slate-900 pb-3">Publish on 2025/01/22</p>
-          <Link href="" className=" text-slate-900 pb-6">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem sapiente quidem
-            libero velit quas, labore quaerat iure hic culpa, eaque vero numquam porro ipsam. In
-            nobis voluptates eos omnis porro.
-          </Link>
-          <Link href="#" className="text-pink-800 hover:text-black">
-            続きを読む
-          </Link>
-        </div>
-      </article>
+          <div className="bg-white flex flex-col justify-start p-6">
+            <Link href="#" className="text-blue-700 pb-4 font-bold">
+              Technology
+            </Link>
+            <Link
+              href={`/articles/${article.id}`}
+              className="text-slate-900 text-3xl hover:text-gray-700 pb-4"
+            >
+              {article.title}
+            </Link>
+            <p className="tex-xm text-slate-900 pb-3">{article.createdAt}</p>
+            <Link href={`/articles/${article.id}`} className=" text-slate-900 pb-6">
+              {article.content}
+            </Link>
+            <Link href={`/articles/${article.id}`} className="text-pink-800 hover:text-black">
+              続きを読む
+            </Link>
+          </div>
+        </article>
+      ))}
     </div>
   );
 };
