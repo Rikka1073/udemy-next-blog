@@ -37,7 +37,7 @@ export const createArticles = async (
   content: string
 ): Promise<Article> => {
   const currentData = new Date().toISOString();
-  const res = await fetch(`http://localhost:3001/posts}`, {
+  const res = await fetch(`http://localhost:3001/posts`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
