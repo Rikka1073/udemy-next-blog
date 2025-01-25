@@ -1,9 +1,12 @@
-import { getAllArticles } from "@/blogApi";
 import ArticleList from "./components/ArticleList";
 
 export default async function Home() {
-  const articles = await getAllArticles();
-  console.log(articles);
+  // const articles = await getAllArticles();
+  // console.log(articles);
+
+  const res = await fetch("http://localhost:3000/api", { cache: "no-store" });
+  const articles = await res.json();
+
   return (
     <div className="md:flex ">
       <section className="w-full md:w-2/3 flex flex-col items-center px-3">
